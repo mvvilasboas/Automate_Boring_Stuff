@@ -19,16 +19,19 @@ def selectiveCopy(rootFolder, ext, newfolder):
         while True:
             if not os.path.exists(newFolderName + '_' + str(number)):
                 os.makedirs(newFolderName+'_'+str(number))
-                newFolder = newFolderName+'_'+str(number)
+                newFolder = os.path.abspath(newFolderName+'_'+str(number))
                 break
             number = number + 1
+
     # Finding the files with the ext.
     for foldername, subfolders, filenames in os.walk(rootFolder):
         print('Searching for files in %s...' %(foldername))
         for filename in filenames:
-            if filename.endswith('.'+ext):
-                print('Copying the file %s' %(filename))
-                shutil.copyfile(filename, newFolder)
+            if not filename.endswith('.'+ext):
+                continue
+            filename = os.path.join(os.path.abspath(filename),filename)
+            shutil.copy(str(filename), str(newFolder))
+            #print('Copying the file %s' %(filename))
     print('Done.')
 
 selectiveCopy('/home/vilasboasmv/Automate_Boring_Stuff/automate_online-materials', 'txt', 'test')    
