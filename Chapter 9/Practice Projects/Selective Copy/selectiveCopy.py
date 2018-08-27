@@ -9,9 +9,8 @@ def selectiveCopy(folder):
     folder = os.path.abspath(folder)
     for foldername, subfolders, filenames in os.walk(folder):
         for filename in filenames:
-            if not filename.endswith('.txt'):
-                continue
-            shutil.copy(filename, '/home/vilasboasmv/Automate_Boring_Stuff/Chapter 9/Practice Projects/test') #Commented out to protect against accidental copying
-            print('Copying ' + filename + '...') #Print only to verify working correctly
+            if filename.endswith('.txt'):
+                shutil.copy(os.path.join(foldername, filename), 'C:\\Users\\Marcus Vinícius\\Documents\\Automate the Boring Stuff\\Automate_Boring_Stuff\\Chapter 9\\Practice Projects\\Selective Copy\\copyTo') #Commented out to protect against accidental copying
+                print('Copying ' + filename + '...') #Print only to verify working correctly
 
-selectiveCopy('/home/vilasboasmv/Automate_Boring_Stuff/automate_online-materials')    
+selectiveCopy(r'C:\\Users\\Marcus Vinícius\\Documents\\Automate the Boring Stuff\\Automate_Boring_Stuff\\Chapter 9\\Practice Projects\\Selective Copy\\copyFrom')
